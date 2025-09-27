@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Sound Festival 2024</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #ff6b35;
+            --secondary: #1a1a1a;
+            --accent: #ffd166;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient-start: #ff6b35;
+            --gradient-end: #f7931e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .poster-container {
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .event-poster {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            padding: 40px;
+            position: relative;
+        }
+        
+        .event-poster:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Typography */
+        .event-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+        }
+        
+        .event-subtitle {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .event-date {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            background-color: var(--secondary);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        
+        .event-location {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        /* Details */
+        .event-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .detail-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .detail-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .detail-content {
+            font-size: 1rem;
+        }
+        
+        /* Lineup */
+        .lineup {
+            margin-bottom: 40px;
+        }
+        
+        .lineup-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--accent);
+        }
+        
+        .artists {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .artist {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .artist:hover {
+            transform: scale(1.05);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .artist-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .artist-genre {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .ticket-button {
+            background-color: var(--secondary);
+            color: var(--light);
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ticket-button:hover {
+            background-color: var(--accent);
+            color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ticket-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Decorative Elements */
+        .corner-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+        }
+        
+        .corner-top-left {
+            top: 0;
+            left: 0;
+            border-top: 5px solid var(--accent);
+            border-left: 5px solid var(--accent);
+        }
+        
+        .corner-top-right {
+            top: 0;
+            right: 0;
+            border-top: 5px solid var(--accent);
+            border-right: 5px solid var(--accent);
+        }
+        
+        .corner-bottom-left {
+            bottom: 0;
+            left: 0;
+            border-bottom: 5px solid var(--accent);
+            border-left: 5px solid var(--accent);
+        }
+        
+        .corner-bottom-right {
+            bottom: 0;
+            right: 0;
+            border-bottom: 5px solid var(--accent);
+            border-right: 5px solid var(--accent);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .event-poster {
+                padding: 25px;
+            }
+            
+            .event-title {
+                font-size: 3rem;
+            }
+            
+            .event-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .event-date {
+                font-size: 1.8rem;
+            }
+            
+            .event-location {
+                font-size: 1.2rem;
+            }
+            
+            .event-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .artists {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .event-title {
+                font-size: 2.2rem;
+            }
+            
+            .event-date {
+                font-size: 1.5rem;
+            }
+            
+            .artists {
+                grid-template-columns: 1fr;
+            }
+            
+            .ticket-button {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <div class="event-poster">
+            <!-- Decorative corners -->
+            <div class="corner-decoration corner-top-left"></div>
+            <div class="corner-decoration corner-top-right"></div>
+            <div class="corner-decoration corner-bottom-left"></div>
+            <div class="corner-decoration corner-bottom-right"></div>
+            
+            <h1 class="event-title animate-fade-in">Urban Sound Festival</h1>
+            <p class="event-subtitle animate-fade-in delay-1">Experience the Rhythm of the City</p>
+            
+            <div class="event-date animate-fade-in delay-1">June 15-17, 2024</div>
+            <p class="event-location animate-fade-in delay-2">City Park Amphitheater • Downtown Metropolis</p>
+            
+            <div class="event-details">
+                <div class="detail-card animate-fade-in delay-2">
+                    <h3 class="detail-title">Time</h3>
+                    <p class="detail-content">Friday: 5PM - 11PM<br>Saturday: 12PM - 11PM<br>Sunday: 12PM - 9PM</p>
+                </div>
+                
+                <div class="detail-card animate-fade-in delay-2">
+                    <h3 class="detail-title">Tickets</h3>
+                    <p class="detail-content">Single Day: $45<br>Weekend Pass: $110<br>VIP Experience: $250</p>
+                </div>
+                
+                <div class="detail-card animate-fade-in delay-2">
+                    <h3 class="detail-title">Features</h3>
+                    <p class="detail-content">4 Stages • Food Trucks<br>Art Installations • Vendor Market<br>Dance Zones</p>
+                </div>
+            </div>
+            
+            <div class="lineup">
+                <h2 class="lineup-title animate-fade-in delay-3">Featured Artists</h2>
+                <div class="artists">
+                    <div class="artist animate-fade-in delay-3">
+                        <div class="artist-name">Neon Pulse</div>
+                        <div class="artist-genre">Electronic</div>
+                    </div>
+                    <div class="artist animate-fade-in delay-3">
+                        <div class="artist-name">City Lights</div>
+                        <div class="artist-genre">Indie Rock</div>
+                    </div>
+                    <div class="artist animate-fade-in delay-3">
+                        <div class="artist-name">Rhythm Method</div>
+                        <div class="artist-genre">Hip Hop</div>
+                    </div>
+                    <div class="artist animate-fade-in delay-3">
+                        <div class="artist-name">Soul Frequency</div>
+                        <div class="artist-genre">R&B</div>
+                    </div>
+                    <div class="artist animate-fade-in delay-3">
+                        <div class="artist-name">Bass Culture</div>
+                        <div class="artist-genre">Dubstep</div>
+                    </div>
+                    <div class="artist animate-fade-in delay-3">
+                        <div class="artist-name">Urban Echo</div>
+                        <div class="artist-genre">Alternative</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <button class="ticket-button animate-fade-in delay-4" id="ticketBtn">Get Tickets Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ticketBtn = document.getElementById('ticketBtn');
+            
+            ticketBtn.addEventListener('click', function() {
+                // Animation effect on button click
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                    alert('Redirecting to ticket purchase page...');
+                    // In a real implementation, this would redirect to a ticket vendor
+                    // window.location.href = 'https://ticketvendor.com/urban-sound-festival';
+                }, 200);
+            });
+            
+            // Add intersection observer for scroll animations if needed
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all elements that should animate on scroll
+            document.querySelectorAll('.detail-card, .artist, .lineup-title').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
